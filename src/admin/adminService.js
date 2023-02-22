@@ -13,7 +13,7 @@ const getBestProfession = async (startDate, endDate) => {
             paid: true,
             ...(startDate || endDate
                 ? {
-                      [Op.or]: [
+                      [Op.and]: [
                           ...(startDate
                               ? [{ paymentDate: { [Op.gte]: startDate } }]
                               : []),
@@ -57,7 +57,7 @@ const getBestClients = async (startDate, endDate, limit) => {
             paid: true,
             ...(startDate || endDate
                 ? {
-                      [Op.or]: [
+                      [Op.and]: [
                           ...(startDate
                               ? [{ paymentDate: { [Op.gte]: startDate } }]
                               : []),
