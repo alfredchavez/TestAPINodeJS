@@ -6,6 +6,9 @@ const { getProfile } = require('../middleware/getProfile')
 const balancesController = require('./balancesController')
 const endpointHandler = require('../endpointHandler')
 
+/*
+ * It performs a deposit, discounting this value from a client to give it to another one
+ */
 router.post(
     '/deposit/:userId',
     getProfile,

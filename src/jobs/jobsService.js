@@ -1,6 +1,11 @@
 const { Op } = require('sequelize')
 const { Contract, Job, Profile, sequelize } = require('../model')
 
+/*
+ * Retrieves all the unpaid in_progress jobs that are related to a profile(either as a Contractor or Client)
+ * @param {Number} profileId Profile id used to filter the jobs
+ * @param {Object} Return requested jobs
+ */
 const getUnpaidJobsForProfile = async (profileId) => {
     return await Job.findAll({
         where: {
@@ -16,6 +21,12 @@ const getUnpaidJobsForProfile = async (profileId) => {
     })
 }
 
+/*
+ * Retrieves a Job by its id, only if its contract client matches the passed profile id
+ * @param {Number} id Job id
+ * @param {Number} profileId Profile id used to filter the job
+ * @param {Object} Return requested job
+ */
 const getJobByIdForProfile = async (id, profileId) => {
     return await Job.findOne({
         where: {
@@ -31,6 +42,11 @@ const getJobByIdForProfile = async (id, profileId) => {
     })
 }
 
+/*
+ * Performs a job payment, moving the job pay amount from the client balance to the contractor balance
+ * @param {Number} id Job id
+ * @param {Number} profile Profile(Client) that represents the user that performs the payment
+ */
 const payJob = async (id, profile) => {
     const job = await getJobByIdForProfile(id, profile.id)
     if (!job)

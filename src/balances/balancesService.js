@@ -1,6 +1,11 @@
 const { Op } = require('sequelize')
 const { Contract, Job, Profile, sequelize } = require('../model')
 
+/*
+ * Calculates how much a client has to pay for the created jobs that are in progress
+ * @param {Number} clientId Client Id
+ * @return {Object} Returns the sum of all the jobs(in_progress/active?) prices that a client has to pay
+ */
 const getTotalAmountClientHasToPay = async (clientId) => {
     return await Job.sum('price', {
         where: {
@@ -16,6 +21,12 @@ const getTotalAmountClientHasToPay = async (clientId) => {
     })
 }
 
+/*
+ * Deposits an amount of money, discounting it from a user and adding this value to the target user balance
+ * @param {Object} fromUser Client that performs the deposit
+ * @param {Object} toUser Client that received the deposit
+ * @param {Number} amount Amount to be deposited
+ */
 const depositToUser = async (fromUser, toUser, amount) => {
     const sumOfJobs = await getTotalAmountClientHasToPay(fromUser.id)
 
@@ -45,4 +56,4 @@ const depositToUser = async (fromUser, toUser, amount) => {
     })
 }
 
-module.exports = { getTotalAmountClientHasToPay, depositToUser }
+module.exports = { depositToUser }

@@ -6,7 +6,9 @@ const { getProfile } = require('../middleware/getProfile')
 const adminController = require('./adminController')
 const endpointHandler = require('../endpointHandler')
 
-//Admin
+/*
+ * It gets the best profession, the one that generated the best earnings in a given date range
+ */
 router.get(
     '/best-profession',
     getProfile,
@@ -18,6 +20,9 @@ router.get(
     })
 )
 
+/*
+ * It gets the best clients, the ones that paid the most for a job
+ */
 router.get(
     '/best-clients',
     getProfile,

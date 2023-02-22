@@ -2,6 +2,12 @@ const sequelize = require('sequelize')
 const Op = sequelize.Op
 const { Contract, Job, Profile } = require('../model')
 
+/*
+ * Retrieves the profession that obtained more earnings(have been paid the most) for a give date range
+ * @param {Date} startDate Start date to filter the job payment dates
+ * @param {Date} endDate End date to filter the job payment dates
+ * @return {Object} Returns an object containing the the profession with more earnings and the earnings it has obtained
+ */
 const getBestProfession = async (startDate, endDate) => {
     const bestProfession = await Job.findOne({
         raw: true,
@@ -45,6 +51,14 @@ const getBestProfession = async (startDate, endDate) => {
     }
 }
 
+/*
+ * Retrieves the clients that paid the most for a job, for a given date range and limit
+ * @param {Date} startDate Start date to filter the job payment dates
+ * @param {Date} endDate End date to filter the job payment dates
+ * @param {Number} limit Integer that defined the max number of clients to retrieve
+ * @return {Object} Returns a list with the best clients, each element contains client's full name, how much
+ *                  it has paid for a job and its id
+ */
 const getBestClients = async (startDate, endDate, limit) => {
     const bestClients = await Job.findAll({
         raw: true,

@@ -1,5 +1,10 @@
 const balancesService = require('./balancesService')
 
+/*
+ * Controller to get the perform a deposit from a client to another one
+ * @param {*} req Request
+ * @param {*} res Response
+ */
 const depositToUser = async (req, res) => {
     const { Profile } = req.app.get('models')
     const clientThatDeposits = req.profile

@@ -1,3 +1,9 @@
+/*
+ * It handles captured exceptions/errors
+ * @param {object} err captured Error/exception
+ * @param {object} req Request
+ * @param {object} res Response
+ */
 const errorHandler = (err, req, res, next) => {
     // TODO use a best way/lib to log errors
     console.error(err)

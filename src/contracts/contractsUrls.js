@@ -7,6 +7,9 @@ const { getProfile } = require('../middleware/getProfile')
 const contractsController = require('./contractsController')
 const endpointHandler = require('../endpointHandler')
 
+/*
+ * Retrieves a contract by its id, only if it is related to the user performing the request
+ */
 router.get(
     '/:id',
     getProfile,
@@ -17,6 +20,9 @@ router.get(
     })
 )
 
+/*
+ * Retrieves all the non-terminated contracts related to the user performing the request
+ */
 router.get(
     '/',
     getProfile,

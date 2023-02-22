@@ -6,13 +6,18 @@ const { getProfile } = require('../middleware/getProfile')
 const jobsController = require('./jobsController')
 const endpointHandler = require('../endpointHandler')
 
-// Jobs
+/*
+ * Retrieves all the unpaid jobs related to a profile
+ */
 router.get(
     '/unpaid',
     getProfile,
     endpointHandler(jobsController.getUnpaidJobs, {})
 )
 
+/*
+ * It pays for a given job(by id)
+ */
 router.post(
     '/:job_id/pay',
     getProfile,
